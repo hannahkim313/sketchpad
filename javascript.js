@@ -4,7 +4,7 @@
  * 
  */
 
-const canvasContainer = document.querySelector(".canvas-container");
+const canvas = document.querySelector(".canvas");
 
 /**
  * 
@@ -26,7 +26,7 @@ function createGrid(num) {
         gridLayout += (i === num - 1) ? "auto" : "auto ";
     }
     gridContainer.style.gridTemplateColumns = gridLayout;
-    canvasContainer.appendChild(gridContainer);
+    canvas.appendChild(gridContainer);
     return gridContainer;
 }
 
@@ -39,10 +39,10 @@ function createGridItems(gridContainer, num) {
     for (let i = 0; i < num; i++) {
         const gridItem = document.createElement("div");
         gridItem.classList.add(`grid-item-${i + 1}`);
-        gridItem.style.width = "50px";
-        gridItem.style.height = "50px";
-        gridItem.style.backgroundColor = "white";
-        gridItem.style.border = "1px solid black";
+        gridItem.style.width = "30px";
+        gridItem.style.height = "30px";
+        gridItem.style.backgroundColor = "#F4F1DE";
+        gridItem.style.border = "1px solid #655c44";
         gridContainer.appendChild(gridItem);
     }
 }

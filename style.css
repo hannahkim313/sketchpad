@@ -1,0 +1,204 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", "Roboto", sans-serif, Arial, Helvetica;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F4F1DE;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+button {
+    width: 100px;
+    height: fit-content;
+    padding: 2px;
+    border: 1.5px solid #655c44;
+    border-radius: 5px;
+}
+
+.main-container {
+    min-height: 100vh;
+    padding: 15px;
+    gap: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap-reverse;
+}
+
+/* 
+*
+* Selectors for the left content start here.
+*
+*/
+
+.left-container {
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* 
+*
+* Selectors for the color palette start here.
+*
+*/
+
+.palette {
+    padding: 15px;
+    gap: 15px;
+    background-color: #69604730;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.default-colors {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 15px;
+}
+
+.red {
+    width: 40px;
+    height: 40px;
+    background-color: #E07A5F;
+}
+
+.orange {
+    width: 40px;
+    height: 40px;
+    background-color: #FFBE0B;
+}
+
+.yellow {
+    width: 40px;
+    height: 40px;
+    background-color: #F2CC8F;
+}
+
+.green {
+    width: 40px;
+    height: 40px;
+    background-color: #81B29A;
+}
+
+.blue {
+    width: 40px;
+    height: 40px;
+    background-color: #3D405B;
+}
+
+.purple {
+    width: 40px;
+    height: 40px;
+    background-color: #C3BAF2;
+}
+
+.dark {
+    width: 40px;
+    height: 40px;
+    background-color: #423E38;
+}
+
+.light {
+    width: 40px;
+    height: 40px;
+    background-color: #F4F1DE;
+}
+
+.current-color {
+    width: 95px;
+    height: 40px;
+    background-color: brown;
+}
+
+/* 
+*
+* Selectors for the left buttons start here.
+*
+*/
+
+.left-buttons {
+    padding: 15px;
+    background-color: #69604730;
+    border-radius: 10px;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/**
+*
+* Selectors for the right content start here.
+*
+*/
+
+.right-container {
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 
+*
+* Selectors for the canvas start here.
+*
+*/
+
+.canvas-container {
+    padding: 45px 15px;
+    background-color: #69604730;
+    border-radius: 10px;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.canvas {
+    display: flex;
+}
+
+/* 
+*
+* Selectors for the bottom panel start here.
+*
+*/
+
+.bottom-panel {
+    padding: 15px;
+    background-color: #69604730;
+    border-radius: 10px;
+    gap: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.slider-container {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/**
+*
+* Selectors for the footer start here.
+*
+*/
+
+.footer {
+    display: flex;
+    justify-content: center;
+}
