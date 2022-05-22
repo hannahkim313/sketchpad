@@ -121,7 +121,9 @@ for (const gridItem of gridItems) {
  }
 
 title.addEventListener("click", function(e) {
+    const oldTitle = title.textContent;
     title.textContent = prompt("Give your masterpiece a short and sweet name!");
+    if (title.textContent === "") title.textContent = oldTitle;
     while (title.textContent.length > 25) {
         title.textContent = prompt("Your title isn't short enough!");
     }
@@ -136,7 +138,9 @@ clearBtn.addEventListener("click", function(e) {
 rainbowBtn.addEventListener("click", function(e) {
     if (rainbowBtn.value === "off") {
         rainbowBtn.value = "on";
+        rainbowBtn.style.backgroundColor = "#E3E3E3";
     } else if (rainbowBtn.value === "on") {
         rainbowBtn.value = "off";
+        rainbowBtn.style.backgroundColor = "#FFFFFF";
     }
 });

@@ -18,8 +18,13 @@ button {
     width: 100px;
     height: fit-content;
     padding: 2px;
+    background-color: #FFFFFF;
     border: 1.5px solid #423E38;;
     border-radius: 5px;
+}
+
+button:hover{
+    cursor: pointer;
 }
 
 .main-container {
@@ -168,6 +173,7 @@ button {
 
 .title:hover{
     color: #80704d;
+    cursor: pointer;
 }
 
 .canvas {
@@ -195,6 +201,11 @@ button {
     flex-direction: column;
     align-items: center;
 }
+
+.clear-btn:active {
+    background-color: #E3E3E3;
+    transform: translateY(2px);
+  }
 
 /**
 *
