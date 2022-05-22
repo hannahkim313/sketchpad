@@ -9,6 +9,7 @@ const colors = document.querySelectorAll(".color");
 const currentColor = document.querySelector(".current-color");
 const title = document.querySelector(".title");
 const clearBtn = document.querySelector(".clear-btn");
+const rainbowBtn = document.querySelector(".rainbow-btn");
 
 /**
  * 
@@ -37,7 +38,7 @@ function createGrid(num) {
 /**
  * Creates and styles grid items of the given grid container.
  * @param {object} gridContainer - Element object of CSS selector.
- * @param {*} num - Number of grid columns squared.
+ * @param {number} num - Number of grid columns squared.
  */
 function createGridItems(gridContainer, num) {
     for (let i = 0; i < num; i++) {
@@ -52,13 +53,22 @@ function createGridItems(gridContainer, num) {
 }
 
 /**
+ * Randomly generates a hex color code.
+ * @returns {string} a hex color code.
+ */
+function getRandomColor() {
+    const randomColor = Math.floor(Math.random()*16777215).toString(16);
+    return `#${randomColor}`;
+}
+
+/**
  * 
  * Function calls start here.
  * 
  */
 
 const gridContainer = createGrid(16);
-createGridItems(gridContainer, 16 ** 2);
+createGridItems(gridContainer, 16**2);
 
 /**
  * 
@@ -87,12 +97,22 @@ const currentColorProps = window.getComputedStyle(currentColor);
 for (const gridItem of gridItems) {
     gridItem.addEventListener("mousedown", function(e) {
         mouseDown = true;
-        gridItem.style.backgroundColor =
-            currentColorProps.getPropertyValue("background-color");
+        if (rainbowBtn.value === "on") {
+            gridItem.style.backgroundColor = getRandomColor();
+        } else {
+            gridItem.style.backgroundColor =
+                currentColorProps.getPropertyValue("background-color");
+        }
     });
     gridItem.addEventListener("mouseenter", function(e) {
-        if (mouseDown === true) gridItem.style.backgroundColor =
-            currentColorProps.getPropertyValue("background-color");
+        if (mouseDown === true) {
+            if (rainbowBtn.value === "on") {
+                gridItem.style.backgroundColor = getRandomColor();
+            } else {
+                gridItem.style.backgroundColor =
+                    currentColorProps.getPropertyValue("background-color");
+            }
+        }
     })
     gridItem.addEventListener("mouseup", function(e) {
         mouseDown = false;
@@ -110,5 +130,13 @@ title.addEventListener("click", function(e) {
 clearBtn.addEventListener("click", function(e) {
     for (const gridItem of gridItems) {
         gridItem.style.backgroundColor = "#F4F1DE";
+    }
+});
+
+rainbowBtn.addEventListener("click", function(e) {
+    if (rainbowBtn.value === "off") {
+        rainbowBtn.value = "on";
+    } else if (rainbowBtn.value === "on") {
+        rainbowBtn.value = "off";
     }
 });
