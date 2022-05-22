@@ -7,6 +7,8 @@
 const canvas = document.querySelector(".canvas");
 const colors = document.querySelectorAll(".color");
 const currentColor = document.querySelector(".current-color");
+const title = document.querySelector(".title");
+const clearBtn = document.querySelector(".clear-btn");
 
 /**
  * 
@@ -97,3 +99,16 @@ for (const gridItem of gridItems) {
         gridItem.removeEventListener("mousedown", e);
     })
  }
+
+title.addEventListener("click", function(e) {
+    title.textContent = prompt("Give your masterpiece a short and sweet name!");
+    while (title.textContent.length > 25) {
+        title.textContent = prompt("Your title isn't short enough!");
+    }
+});
+
+clearBtn.addEventListener("click", function(e) {
+    for (const gridItem of gridItems) {
+        gridItem.style.backgroundColor = "#F4F1DE";
+    }
+});
