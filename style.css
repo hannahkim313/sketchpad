@@ -1,13 +1,13 @@
 * {
     margin: 0;
     padding: 0;
-    color: #423E38;
+    color: rgb(66, 62, 56);
     font-family: "Inter", "Roboto", sans-serif, Arial, Helvetica;
     box-sizing: border-box;
 }
 
 body {
-    background-color: #F4F1DE;
+    background-color: rgb(244, 240, 221);
 }
 
 a {
@@ -18,8 +18,8 @@ button {
     width: 100px;
     height: fit-content;
     padding: 2px;
-    background-color: #FFFFFF;
-    border: 1.5px solid #423E38;;
+    background-color: rgb(255, 255, 255);
+    border: 1.5px solid rgb(66, 62, 56);
     border-radius: 5px;
 }
 
@@ -59,7 +59,7 @@ button:hover{
 .palette {
     padding: 15px;
     gap: 15px;
-    background-color: #69604730;
+    background-color: rgba(106, 97, 72, 0.188);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -75,55 +75,55 @@ button:hover{
 .red {
     width: 40px;
     height: 40px;
-    background-color: #E07A5F;
+    background-color: rgb(225, 124, 96);
 }
 
 .orange {
     width: 40px;
     height: 40px;
-    background-color: #FFBE0B;
+    background-color: rgb(255, 190, 10);
 }
 
 .yellow {
     width: 40px;
     height: 40px;
-    background-color: #F2CC8F;
+    background-color: rgb(242, 203, 141);
 }
 
 .green {
     width: 40px;
     height: 40px;
-    background-color: #81B29A;
+    background-color: rgb(129, 177, 154);
 }
 
 .blue {
     width: 40px;
     height: 40px;
-    background-color: #3D405B;
+    background-color: rgb(61, 64, 92);
 }
 
 .purple {
     width: 40px;
     height: 40px;
-    background-color: #C3BAF2;
+    background-color: rgb(196, 186, 242);
 }
 
 .dark {
     width: 40px;
     height: 40px;
-    background-color: #423E38;
+    background-color: rgb(66, 62, 56);
 }
 
 .light {
     width: 40px;
     height: 40px;
-    background-color: #F4F1DE;
+    background-color: rgb(244, 240, 221);
 }
 
 .current-color {
     width: 95px;
     height: 40px;
-    background-color: #E07A5F;
+    background-color: rgb(225, 124, 96);
 }
 
 /* 
@@ -134,12 +134,19 @@ button:hover{
 
 .left-buttons {
     padding: 15px;
-    background-color: #69604730;
+    background-color: rgba(106, 97, 72, 0.188);
     border-radius: 10px;
     gap: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.rainbow-btn:active,
+.gradient-btn:active,
+.color-dropper-btn:active {
+    background-color: rgb(227, 227, 227);
+    transform: translateY(2px);
 }
 
 /**
@@ -163,7 +170,7 @@ button:hover{
 
 .canvas-container {
     padding: 45px 15px;
-    background-color: #69604730;
+    background-color: rgba(106, 97, 72, 0.188);
     border-radius: 10px;
     gap: 15px;
     display: flex;
@@ -172,7 +179,7 @@ button:hover{
 }
 
 .title:hover{
-    color: #80704d;
+    color: rgb(128, 111, 77);
     cursor: pointer;
 }
 
@@ -188,7 +195,7 @@ button:hover{
 
 .bottom-panel {
     padding: 15px;
-    background-color: #69604730;
+    background-color: rgba(106, 97, 72, 0.188);
     border-radius: 10px;
     gap: 100px;
     display: flex;
@@ -203,7 +210,7 @@ button:hover{
 }
 
 .clear-btn:active {
-    background-color: #E3E3E3;
+    background-color: rgb(227, 227, 227);
     transform: translateY(2px);
   }
 

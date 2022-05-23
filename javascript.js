@@ -10,6 +10,7 @@ const currentColor = document.querySelector(".current-color");
 const title = document.querySelector(".title");
 const clearBtn = document.querySelector(".clear-btn");
 const rainbowBtn = document.querySelector(".rainbow-btn");
+const gradientBtn = document.querySelector(".gradient-btn");
 
 /**
  * 
@@ -46,19 +47,49 @@ function createGridItems(gridContainer, num) {
         gridItem.classList.add("grid-item");
         gridItem.style.width = "30px";
         gridItem.style.height = "30px";
-        gridItem.style.backgroundColor = "#F4F1DE";
-        gridItem.style.border = "1px solid #655c44";
+        gridItem.style.backgroundColor = "rgb(244, 240, 221)";
+        gridItem.style.border = "1px solid rgb(112, 97, 56)";
         gridContainer.appendChild(gridItem);
     }
 }
 
 /**
- * Randomly generates a hex color code.
- * @returns {string} a hex color code.
+ * Randomly generates a rgb color code.
+ * @returns {string} a rgb color code.
  */
 function getRandomColor() {
-    const randomColor = Math.floor(Math.random()*16777215).toString(16);
-    return `#${randomColor}`;
+    const r = Math.floor(Math.random() * 255);
+    const g = Math.floor(Math.random() * 255);
+    const b = Math.floor(Math.random() * 255);
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
+/**
+ * Gets the rgb value of the parameter and adds 1/10 of the remaining
+ * distance from the current rgb value to 255 and returns the new color
+ * values combined.
+ * @param {object} gradientColor -Element object of CSS selector.
+ * @returns {string} rgb value of new color.
+ */
+function createGradient(gradientColor) {
+    const leftParenIndex = gradientColor.indexOf("(");
+    const rightParenIndex = gradientColor.indexOf(")");
+    let commaIndex = gradientColor.indexOf(",");
+    let spaceIndex = gradientColor.indexOf(" ");
+
+    const r = gradientColor.slice(leftParenIndex + 1, commaIndex);
+    gradientColor = gradientColor.replace(",", ".");
+    commaIndex = gradientColor.indexOf(",");
+    const g = gradientColor.slice(spaceIndex + 1, commaIndex);
+    gradientColor = gradientColor.replace(" ", ".");
+    spaceIndex = gradientColor.indexOf(" ");
+    const b = gradientColor.slice(spaceIndex + 1, rightParenIndex);
+
+    const rNew = parseInt(r) + Math.round((255 - r) / 10);;
+    const gNew = parseInt(g) + Math.round((255 - g) / 10);;
+    const bNew = parseInt(b) + Math.round((255 - b) / 10);;
+    
+    return `rgb(${rNew}, ${gNew}, ${bNew})`;
 }
 
 /**
@@ -68,7 +99,7 @@ function getRandomColor() {
  */
 
 const gridContainer = createGrid(16);
-createGridItems(gridContainer, 16**2);
+createGridItems(gridContainer, 16 ** 2);
 
 /**
  * 
@@ -97,8 +128,12 @@ const currentColorProps = window.getComputedStyle(currentColor);
 for (const gridItem of gridItems) {
     gridItem.addEventListener("mousedown", function(e) {
         mouseDown = true;
+        gradientColor = currentColorProps.getPropertyValue("background-color");
         if (rainbowBtn.value === "on") {
             gridItem.style.backgroundColor = getRandomColor();
+        } else if (gradientBtn.value === "on") {
+            gridItem.style.backgroundColor = createGradient(gradientColor);
+            gradientColor = createGradient(gradientColor);
         } else {
             gridItem.style.backgroundColor =
                 currentColorProps.getPropertyValue("background-color");
@@ -108,6 +143,9 @@ for (const gridItem of gridItems) {
         if (mouseDown === true) {
             if (rainbowBtn.value === "on") {
                 gridItem.style.backgroundColor = getRandomColor();
+            } else if (gradientBtn.value === "on") {
+                gridItem.style.backgroundColor = createGradient(gradientColor);
+                gradientColor = createGradient(gradientColor);
             } else {
                 gridItem.style.backgroundColor =
                     currentColorProps.getPropertyValue("background-color");
@@ -131,16 +169,30 @@ title.addEventListener("click", function(e) {
 
 clearBtn.addEventListener("click", function(e) {
     for (const gridItem of gridItems) {
-        gridItem.style.backgroundColor = "#F4F1DE";
+        gridItem.style.backgroundColor = "rgb(244, 240, 221)";
     }
 });
 
 rainbowBtn.addEventListener("click", function(e) {
     if (rainbowBtn.value === "off") {
+        gradientBtn.value = "off";
+        gradientBtn.style.backgroundColor = "rgb(255, 255, 255)";
         rainbowBtn.value = "on";
-        rainbowBtn.style.backgroundColor = "#E3E3E3";
+        rainbowBtn.style.backgroundColor = "rgb(227, 227, 227)";
     } else if (rainbowBtn.value === "on") {
         rainbowBtn.value = "off";
-        rainbowBtn.style.backgroundColor = "#FFFFFF";
+        rainbowBtn.style.backgroundColor = "rgb(255, 255, 255)";
+    }
+});
+
+gradientBtn.addEventListener("click", function(e) {
+    if (gradientBtn.value === "off") {
+        rainbowBtn.value = "off";
+        rainbowBtn.style.backgroundColor = "rgb(255, 255, 255)";
+        gradientBtn.value = "on";
+        gradientBtn.style.backgroundColor = "rgb(227, 227, 227)";
+    } else if (gradientBtn.value === "on") {
+        gradientBtn.value = "off";
+        gradientBtn.style.backgroundColor = "rgb(255, 255, 255)";
     }
 });
