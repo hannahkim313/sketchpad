@@ -11,6 +11,7 @@ const title = document.querySelector(".title");
 const clearBtn = document.querySelector(".clear-btn");
 const rainbowBtn = document.querySelector(".rainbow-btn");
 const gradientBtn = document.querySelector(".gradient-btn");
+const colorDropperBtn = document.querySelector(".color-dropper-btn");
 
 /**
  * 
@@ -134,6 +135,9 @@ for (const gridItem of gridItems) {
         } else if (gradientBtn.value === "on") {
             gridItem.style.backgroundColor = createGradient(gradientColor);
             gradientColor = createGradient(gradientColor);
+        } else if (colorDropperBtn.value === "on") {
+            const gridItemProps = window.getComputedStyle(gridItem);
+            currentColor.style.backgroundColor = gridItemProps.getPropertyValue("background-color");
         } else {
             gridItem.style.backgroundColor =
                 currentColorProps.getPropertyValue("background-color");
@@ -175,10 +179,12 @@ clearBtn.addEventListener("click", function(e) {
 
 rainbowBtn.addEventListener("click", function(e) {
     if (rainbowBtn.value === "off") {
-        gradientBtn.value = "off";
-        gradientBtn.style.backgroundColor = "rgb(255, 255, 255)";
         rainbowBtn.value = "on";
+        gradientBtn.value = "off";
+        colorDropperBtn.value = "off";
         rainbowBtn.style.backgroundColor = "rgb(227, 227, 227)";
+        gradientBtn.style.backgroundColor = "rgb(255, 255, 255)";
+        colorDropperBtn.style.backgroundColor = "rgb(255, 255, 255)";
     } else if (rainbowBtn.value === "on") {
         rainbowBtn.value = "off";
         rainbowBtn.style.backgroundColor = "rgb(255, 255, 255)";
@@ -187,12 +193,28 @@ rainbowBtn.addEventListener("click", function(e) {
 
 gradientBtn.addEventListener("click", function(e) {
     if (gradientBtn.value === "off") {
-        rainbowBtn.value = "off";
-        rainbowBtn.style.backgroundColor = "rgb(255, 255, 255)";
         gradientBtn.value = "on";
+        rainbowBtn.value = "off";
+        colorDropperBtn.value = "off";
         gradientBtn.style.backgroundColor = "rgb(227, 227, 227)";
+        rainbowBtn.style.backgroundColor = "rgb(255, 255, 255)";
+        colorDropperBtn.style.backgroundColor = "rgb(255, 255, 255)";
     } else if (gradientBtn.value === "on") {
         gradientBtn.value = "off";
         gradientBtn.style.backgroundColor = "rgb(255, 255, 255)";
     }
 });
+
+colorDropperBtn.addEventListener("click", function(e) {
+    if (colorDropperBtn.value === "off") {
+        colorDropperBtn.value = "on";
+        rainbowBtn.value = "off";
+        gradientBtn.value = "off";
+        colorDropperBtn.style.backgroundColor = "rgb(227, 227, 227)";
+        rainbowBtn.style.backgroundColor = "rgb(255, 255, 255)";
+        gradientBtn.style.backgroundColor = "rgb(255, 255, 255)";
+    } else if (colorDropperBtn.value === "on") {
+        colorDropperBtn.value = "off";
+        colorDropperBtn.style.backgroundColor = "rgb(255, 255, 255)";
+    }
+})
