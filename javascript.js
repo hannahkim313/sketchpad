@@ -12,6 +12,8 @@ const clearBtn = document.querySelector(".clear-btn");
 const rainbowBtn = document.querySelector(".rainbow-btn");
 const gradientBtn = document.querySelector(".gradient-btn");
 const colorDropperBtn = document.querySelector(".color-dropper-btn");
+const slider = document.querySelector(".slider");
+const sliderValue = document.querySelector(".grid-size");
 
 /**
  * 
@@ -33,6 +35,9 @@ function createGrid(num) {
         gridLayout += (i === num - 1) ? "auto" : "auto ";
     }
     gridContainer.style.gridTemplateColumns = gridLayout;
+    if (canvas.hasChildNodes() === true) {
+        canvas.removeChild(canvas.firstChild);
+    }
     canvas.appendChild(gridContainer);
     return gridContainer;
 }
@@ -40,16 +45,16 @@ function createGrid(num) {
 /**
  * Creates and styles grid items of the given grid container.
  * @param {object} gridContainer - Element object of CSS selector.
- * @param {number} num - Number of grid columns squared.
+ * @param {number} num - Number of grid columns.
  */
 function createGridItems(gridContainer, num) {
+    const gridItemSize = 480 / Math.sqrt(num);
     for (let i = 0; i < num; i++) {
         const gridItem = document.createElement("div");
         gridItem.classList.add("grid-item");
-        gridItem.style.width = "30px";
-        gridItem.style.height = "30px";
-        gridItem.style.backgroundColor = "rgb(244, 240, 221)";
-        gridItem.style.border = "1px solid rgb(112, 97, 56)";
+        gridItem.style.width = `${gridItemSize}px`;
+        gridItem.style.height = `${gridItemSize}px`;
+        gridItem.style.backgroundColor = "rgb(255, 255, 255)";
         gridContainer.appendChild(gridItem);
     }
 }
@@ -94,13 +99,56 @@ function createGradient(gradientColor) {
 }
 
 /**
+ * Draws colors on the canvas based on different mouse events.
+ */
+function drawColors() {
+    for (const gridItem of gridItemsList) {
+        gridItem.addEventListener("mousedown", function(e) {
+            mouseDown = true;
+            gradientColor = currentColorProps.getPropertyValue("background-color");
+            if (rainbowBtn.value === "on") {
+                gridItem.style.backgroundColor = getRandomColor();
+            } else if (gradientBtn.value === "on") {
+                gridItem.style.backgroundColor = createGradient(gradientColor);
+                gradientColor = createGradient(gradientColor);
+            } else if (colorDropperBtn.value === "on") {
+                const gridItemProps = window.getComputedStyle(gridItem);
+                currentColor.style.backgroundColor = gridItemProps.getPropertyValue("background-color");
+            } else {
+                gridItem.style.backgroundColor =
+                    currentColorProps.getPropertyValue("background-color");
+            }
+        });
+        gridItem.addEventListener("mouseenter", function(e) {
+            if (mouseDown === true) {
+                if (rainbowBtn.value === "on") {
+                    gridItem.style.backgroundColor = getRandomColor();
+                } else if (gradientBtn.value === "on") {
+                    gridItem.style.backgroundColor = createGradient(gradientColor);
+                    gradientColor = createGradient(gradientColor);
+                } else {
+                    gridItem.style.backgroundColor =
+                        currentColorProps.getPropertyValue("background-color");
+                }
+            }
+        });
+        gridItem.addEventListener("mouseup", function(e) {
+            mouseDown = false;
+            gridItem.removeEventListener("mousedown", e);
+        });
+     }
+}
+
+/**
  * 
- * Function calls start here.
+ * Variable declarations start here.
  * 
  */
 
-const gridContainer = createGrid(16);
-createGridItems(gridContainer, 16 ** 2);
+let gridContainer = createGrid(16);
+let gridItems = createGridItems(gridContainer, 16 ** 2);
+let mouseDown = false;
+const currentColorProps = window.getComputedStyle(currentColor);
 
 /**
  * 
@@ -108,13 +156,17 @@ createGridItems(gridContainer, 16 ** 2);
  * 
  */
 
- const gridItems = document.querySelectorAll(".grid-item");
+let gridItemsList = document.querySelectorAll(".grid-item");
 
 /**
  * 
  * Event listeners start here.
  * 
  */
+
+window.addEventListener("pageshow", function(e) {
+    drawColors();
+});
 
 for (const color of colors) {
     color.addEventListener("click", function(e) {
@@ -123,44 +175,6 @@ for (const color of colors) {
             colorProps.getPropertyValue("background-color");
     });
 }
-
-let mouseDown = false;
-const currentColorProps = window.getComputedStyle(currentColor);
-for (const gridItem of gridItems) {
-    gridItem.addEventListener("mousedown", function(e) {
-        mouseDown = true;
-        gradientColor = currentColorProps.getPropertyValue("background-color");
-        if (rainbowBtn.value === "on") {
-            gridItem.style.backgroundColor = getRandomColor();
-        } else if (gradientBtn.value === "on") {
-            gridItem.style.backgroundColor = createGradient(gradientColor);
-            gradientColor = createGradient(gradientColor);
-        } else if (colorDropperBtn.value === "on") {
-            const gridItemProps = window.getComputedStyle(gridItem);
-            currentColor.style.backgroundColor = gridItemProps.getPropertyValue("background-color");
-        } else {
-            gridItem.style.backgroundColor =
-                currentColorProps.getPropertyValue("background-color");
-        }
-    });
-    gridItem.addEventListener("mouseenter", function(e) {
-        if (mouseDown === true) {
-            if (rainbowBtn.value === "on") {
-                gridItem.style.backgroundColor = getRandomColor();
-            } else if (gradientBtn.value === "on") {
-                gridItem.style.backgroundColor = createGradient(gradientColor);
-                gradientColor = createGradient(gradientColor);
-            } else {
-                gridItem.style.backgroundColor =
-                    currentColorProps.getPropertyValue("background-color");
-            }
-        }
-    })
-    gridItem.addEventListener("mouseup", function(e) {
-        mouseDown = false;
-        gridItem.removeEventListener("mousedown", e);
-    })
- }
 
 title.addEventListener("click", function(e) {
     const oldTitle = title.textContent;
@@ -171,8 +185,16 @@ title.addEventListener("click", function(e) {
     }
 });
 
+slider.addEventListener("input", function(e) {
+    sliderValue.textContent = `${slider.value} x ${slider.value}`;
+    gridContainer = createGrid(slider.value);
+    gridItems = createGridItems(gridContainer, slider.value ** 2);
+    gridItemsList = document.querySelectorAll(".grid-item");
+    drawColors();
+});
+
 clearBtn.addEventListener("click", function(e) {
-    for (const gridItem of gridItems) {
+    for (const gridItem of gridItemsList) {
         gridItem.style.backgroundColor = "rgb(244, 240, 221)";
     }
 });
@@ -217,4 +239,4 @@ colorDropperBtn.addEventListener("click", function(e) {
         colorDropperBtn.value = "off";
         colorDropperBtn.style.backgroundColor = "rgb(255, 255, 255)";
     }
-})
+});
