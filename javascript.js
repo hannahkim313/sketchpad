@@ -103,6 +103,9 @@ function createGradient(gradientColor) {
  */
 function drawColors() {
     for (const gridItem of gridItemsList) {
+        gridItem.addEventListener("dragstart", function(e) {
+            e.preventDefault();
+        });
         gridItem.addEventListener("mousedown", function(e) {
             mouseDown = true;
             gradientColor = currentColorProps.getPropertyValue("background-color");
