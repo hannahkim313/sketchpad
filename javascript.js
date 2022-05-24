@@ -74,7 +74,7 @@ function getRandomColor() {
  * Gets the rgb value of the parameter and adds 1/10 of the remaining
  * distance from the current rgb value to 255 and returns the new color
  * values combined.
- * @param {object} gradientColor -Element object of CSS selector.
+ * @param {object} gradientColor - CSS background-color property of an element.
  * @returns {string} rgb value of new color.
  */
 function createGradient(gradientColor) {
