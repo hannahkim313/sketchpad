@@ -195,7 +195,7 @@ slider.addEventListener("input", function(e) {
 
 clearBtn.addEventListener("click", function(e) {
     for (const gridItem of gridItemsList) {
-        gridItem.style.backgroundColor = "rgb(244, 240, 221)";
+        gridItem.style.backgroundColor = "rgb(255, 255, 255)";
     }
 });
 

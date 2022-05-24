@@ -124,6 +124,8 @@ button:hover{
     width: 95px;
     height: 40px;
     background-color: rgb(225, 124, 96);
+    border: 1.5px solid black;
+    border-radius: 5px;
 }
 
 /* 
