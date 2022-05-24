@@ -7,18 +7,23 @@ sketchpad/etch-a-sketch in which the user can draw colored pixels onto a canvas.
 Some of the key features implemented into this sketchpad are as follows:
 
 * An option for the user to change the name of the canvas
-* A small color palette with an interactive color picker that serves as both
-    a way for the user to custom select their own color and show which color
-    is currently selected
+* A small color palette that serves as both a way for the user to select their
+    own color and show which color is currently selected
 * A rainbow button that, when toggled on, randomly selects a color for every
     pixel drawn on the canvas
 * A gradient button that, when toggled on, decreases the shade of the selected
-    color after every few pixels and resets thereafter
+    color after every few pixels until it is completely white
 * A color dropper button that, when toggled on, lets the user click any color
     on the canvas to change the currently selected color into the newly selected
     one
 * A slider that allows the user to change the size of the pixels on the canvas
 * A clear button that deletes everything on the canvas
+
+## In Action
+
+<img src="./images/example-1.jpg" width="500" />
+<img src="./images/example-2.jpg" width="500" />
+<img src="./images/example-3.jpg" width="500" />
 
 ## Goals
 
